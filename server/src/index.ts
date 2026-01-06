@@ -12,6 +12,10 @@ import playerRoutes from './api/routes/player.routes';
 import gameRoutes from './api/routes/game.routes';
 import eventRoutes from './api/routes/event.routes';
 import economyRoutes from './api/routes/economy.routes';
+import vipRoutes from './api/routes/vip.routes';
+import leaderboardRoutes from './api/routes/leaderboard.routes';
+import dailyChallengeRoutes from './api/routes/daily-challenge.routes';
+import milestoneRoutes from './api/routes/milestone.routes';
 
 const app = express();
 
@@ -47,6 +51,10 @@ app.use('/api/player', playerRoutes);
 app.use('/api/game', gameRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/economy', economyRoutes);
+app.use('/api/vip', vipRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/daily-challenges', dailyChallengeRoutes);
+app.use('/api/milestones', milestoneRoutes);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({ error: 'Not found' });
