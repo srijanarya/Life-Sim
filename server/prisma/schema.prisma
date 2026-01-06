@@ -39,10 +39,29 @@ model Player {
   achievements       PlayerAchievement[]
   transactions      EconomyTransaction[]
   leaderboardEntry  LeaderboardEntry?
-  achievements       PlayerAchievement[]
-  transactions      EconomyTransaction[]
   avatar           PlayerAvatar?
   avatarInventory   PlayerAvatarInventory[]
+}
+
+model PlayerProfile {
+  id              String  @id @default(uuid())
+  playerId        String  @unique
+  player          Player  @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  age             Int     @default(18)
+  health          Int     @default(100)
+  happiness       Int     @default(100)
+  wealth          Int     @default(0)
+  intelligence    Int     @default(50)
+  charisma        Int     @default(50)
+  physical        Int     @default(50)
+  creativity      Int     @default(50)
+
+  totalPlaytime   Int     @default(0)
+  gamesPlayed     Int     @default(0)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model GameState {
@@ -157,6 +176,7 @@ model PlayerDecision {
   template        DecisionTemplate @relation(fields: [templateId], references: [id])
 
   outcomes        Json
+
   createdAt       DateTime        @default(now())
 }
 
@@ -208,6 +228,7 @@ model PlayerCareer {
 
   startedAt       DateTime    @default(now())
   endedAt         DateTime?
+
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 }
@@ -260,7 +281,7 @@ enum TransactionType {
 model EconomyTransaction {
   id              String          @id @default(uuid())
   playerId        String
-  player          Player          @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  player          Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
 
   type            TransactionType
   amount          Int
@@ -271,18 +292,6 @@ model EconomyTransaction {
   metadata        Json?
 
   createdAt       DateTime        @default(now())
-}
-
-model LeaderboardEntry {
-  id              String      @id @default(uuid())
-  playerId        String      @unique
-  player          Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
-
-  score           Int         @default(0)
-  rank            Int?
-  season          String      @default("current")
-
-  updatedAt       DateTime    @updatedAt
 }
 
 enum AvatarCategory {
@@ -335,9 +344,22 @@ model PlayerAvatar {
 model PlayerAvatarInventory {
   id              String        @id @default(uuid())
   playerId        String
-  player          Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  avatarItemId    String
-  avatarItem      AvatarItem     @relation(fields: [avatarItemId], references: [id], onDelete: Cascade)
+  player          Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
 
-  purchasedAt      DateTime      @default(now())
+  avatarItemId    String
+  avatarItem      AvatarItem   @relation(fields: [avatarItemId], references: [id], onDelete: Cascade)
+
+  purchasedAt      DateTime    @default(now())
+}
+
+model LeaderboardEntry {
+  id              String      @id @default(uuid())
+  playerId        String      @unique
+  player          Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  score           Int         @default(0)
+  rank            Int?
+  season          String      @default("current")
+
+  updatedAt       DateTime    @updatedAt
 }
