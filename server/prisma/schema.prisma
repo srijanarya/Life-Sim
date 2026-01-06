@@ -39,27 +39,10 @@ model Player {
   achievements       PlayerAchievement[]
   transactions      EconomyTransaction[]
   leaderboardEntry  LeaderboardEntry?
-}
-
-model PlayerProfile {
-  id              String  @id @default(uuid())
-  playerId        String  @unique
-  player          Player  @relation(fields: [playerId], references: [id], onDelete: Cascade)
-
-  age             Int     @default(18)
-  health          Int     @default(100)
-  happiness       Int     @default(100)
-  wealth          Int     @default(0)
-  intelligence    Int     @default(50)
-  charisma        Int     @default(50)
-  physical        Int     @default(50)
-  creativity      Int     @default(50)
-
-  totalPlaytime   Int     @default(0)
-  gamesPlayed     Int     @default(0)
-
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  achievements       PlayerAchievement[]
+  transactions      EconomyTransaction[]
+  avatar           PlayerAvatar?
+  avatarInventory   PlayerAvatarInventory[]
 }
 
 model GameState {
@@ -300,4 +283,61 @@ model LeaderboardEntry {
   season          String      @default("current")
 
   updatedAt       DateTime    @updatedAt
+}
+
+enum AvatarCategory {
+  HAIR
+  FACE
+  OUTFIT
+  ACCESSORY
+}
+
+enum AvatarRarity {
+  COMMON
+  UNCOMMON
+  RARE
+  EPIC
+  LEGENDARY
+}
+
+model AvatarItem {
+  id              String        @id @default(uuid())
+  name            String
+  description     String?
+  category        AvatarCategory
+  imageUrl        String
+  rarity          AvatarRarity  @default(COMMON)
+  price           Int           @default(0)
+  priceCurrency   String        @default("game")
+  isPremiumOnly   Boolean       @default(false)
+
+  isActive        Boolean       @default(true)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  inventory        PlayerAvatarInventory[]
+}
+
+model PlayerAvatar {
+  id              String      @id @default(uuid())
+  playerId        String      @unique
+  player          Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  hairId          String?
+  faceId          String?
+  outfitId        String?
+  accessoryId     String?
+
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model PlayerAvatarInventory {
+  id              String        @id @default(uuid())
+  playerId        String
+  player          Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  avatarItemId    String
+  avatarItem      AvatarItem     @relation(fields: [avatarItemId], references: [id], onDelete: Cascade)
+
+  purchasedAt      DateTime      @default(now())
 }

@@ -16,6 +16,7 @@ import vipRoutes from './api/routes/vip.routes';
 import leaderboardRoutes from './api/routes/leaderboard.routes';
 import dailyChallengeRoutes from './api/routes/daily-challenge.routes';
 import milestoneRoutes from './api/routes/milestone.routes';
+import avatarRoutes from './api/routes/avatar.routes';
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.use('/api/vip', vipRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/daily-challenges', dailyChallengeRoutes);
 app.use('/api/milestones', milestoneRoutes);
+app.use('/api/avatars', avatarRoutes);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({ error: 'Not found' });
