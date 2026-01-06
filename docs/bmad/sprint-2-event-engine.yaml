@@ -1,0 +1,63 @@
+workflow:
+  name: "Sprint 2 - Event Engine & Content"
+  version: "1.0.0"
+  bmad_method: "BMad Method"
+  
+phases:
+  - phase: "Planning"
+    agent: "PM"
+    tasks:
+      - id: "define_event_categories"
+        description: "Define event categories and rarities"
+        deliverable: "Event taxonomy document"
+      
+      - id: "create_event_templates"
+        description: "Create initial event templates"
+        deliverable: "Event content spreadsheet"
+  
+  - phase: "Solutioning"
+    agents:
+      - role: "Architect"
+        tasks:
+          - id: "design_event_weighting"
+            description: "Design event weighting and probability system"
+            deliverable: "Weighting algorithm spec"
+      
+      - role: "Content Designer"
+        tasks:
+          - id: "write_event_content"
+            description: "Write event descriptions and decision text"
+            dependencies: ["create_event_templates"]
+            deliverable: "Event content library"
+  
+  - phase: "Implementation"
+    agent: "Developer"
+    tasks:
+      - id: "implement_event_weighting"
+        description: "Implement event weighting system"
+        dependencies: ["design_event_weighting"]
+        deliverable: "Weighting system implementation"
+      
+      - id: "seed_event_templates"
+        description: "Seed database with initial events"
+        dependencies: ["write_event_content"]
+        deliverable: "Event database seed"
+      
+      - id: "implement_event_ui"
+        description: "Implement event popup UI in Unity"
+        deliverable: "Event UI components"
+      
+      - id: "implement_decision_ui"
+        description: "Implement decision choice UI in Unity"
+        deliverable: "Decision UI components"
+  
+  - phase: "Testing"
+    agent: "Test Architect"
+    tasks:
+      - id: "test_event_generation"
+        description: "Test event generation logic"
+        deliverable: "Event generation test suite"
+      
+      - id: "test_decision_outcomes"
+        description: "Test decision outcome calculations"
+        deliverable: "Decision outcome test suite"

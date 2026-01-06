@@ -1,0 +1,74 @@
+workflow:
+  name: "Quick Spec - Bug Fix / Small Feature"
+  version: "1.0.0"
+  bmad_method: "BMad Method (Quick Spec)"
+  
+description: |
+  This workflow is designed for quick bug fixes or small features that don't require full BMad Method analysis.
+  It provides a streamlined path from issue to implementation.
+
+phases:
+  - phase: "Tech Spec"
+    agent: "Developer"
+    tasks:
+      - id: "analyze_issue"
+        description: "Analyze the issue or feature request"
+        deliverable: "Issue analysis"
+        acceptance_criteria:
+          - Root cause identified (for bugs)
+          - Requirements clarified (for features)
+          - Impact scope defined
+      
+      - id: "design_solution"
+        description: "Design the technical solution"
+        dependencies: ["analyze_issue"]
+        deliverable: "Technical specification"
+        acceptance_criteria:
+          - Solution approach documented
+          - Files to modify identified
+          - Potential edge cases listed
+  
+  - phase: "Implementation"
+    agent: "Developer"
+    tasks:
+      - id: "implement_fix"
+        description: "Implement the solution"
+        dependencies: ["design_solution"]
+        deliverable: "Code changes"
+        acceptance_criteria:
+          - Code follows existing patterns
+          - Tests added or updated
+          - No new lint errors
+      
+      - id: "verify_fix"
+        description: "Verify the fix works as expected"
+        dependencies: ["implement_fix"]
+        deliverable: "Verification report"
+        acceptance_criteria:
+          - Original issue resolved
+          - No regressions introduced
+          - Edge cases tested
+  
+  - phase: "Documentation"
+    agent: "Tech Writer"
+    tasks:
+      - id: "update_documentation"
+        description: "Update relevant documentation"
+        dependencies: ["verify_fix"]
+        deliverable: "Updated documentation"
+        acceptance_criteria:
+          - API docs updated (if API changed)
+          - README updated (if behavior changed)
+          - Changelog updated
+
+quick_start:
+  triggers:
+    - "Bug fix"
+    - "Small feature (1-2 files)"
+    - "UI tweak"
+    - "Refactor single component"
+  
+  estimated_time: "30 minutes - 2 hours"
+  recommended_agents:
+    - "Developer"
+    - "Tech Writer (optional)"

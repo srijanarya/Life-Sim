@@ -1,0 +1,303 @@
+// Prisma schema for LifeCraft - Real Life Simulator
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PlayerStatus {
+  ACTIVE
+  SUSPENDED
+  BANNED
+}
+
+enum SubscriptionTier {
+  FREE
+  VIP_MONTHLY
+  VIP_YEARLY
+}
+
+model Player {
+  id                String           @id @default(uuid())
+  email             String           @unique
+  username          String           @unique
+  passwordHash      String
+  status            PlayerStatus     @default(ACTIVE)
+  subscriptionTier SubscriptionTier @default(FREE)
+  subscriptionEnds DateTime?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  lastLoginAt       DateTime?
+
+  profile           PlayerProfile?
+  gameState         GameState?
+  careers            PlayerCareer[]
+  achievements       PlayerAchievement[]
+  transactions      EconomyTransaction[]
+  leaderboardEntry  LeaderboardEntry?
+}
+
+model PlayerProfile {
+  id              String  @id @default(uuid())
+  playerId        String  @unique
+  player          Player  @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  age             Int     @default(18)
+  health          Int     @default(100)
+  happiness       Int     @default(100)
+  wealth          Int     @default(0)
+  intelligence    Int     @default(50)
+  charisma        Int     @default(50)
+  physical        Int     @default(50)
+  creativity      Int     @default(50)
+
+  totalPlaytime   Int     @default(0)
+  gamesPlayed     Int     @default(0)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model GameState {
+  id              String      @id @default(uuid())
+  playerId        String      @unique
+  player          Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  currentYear     Int         @default(1)
+  currentMonth    Int         @default(1)
+  currentAge      Int         @default(18)
+
+  isInRelationship Boolean     @default(false)
+  relationshipId  String?
+
+  careerId        String?
+  careerLevel     Int         @default(0)
+
+  lastEventTime   DateTime    @default(now())
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  events          PlayerEvent[]
+  decisions       PlayerDecision[]
+}
+
+enum EventType {
+  LIFE_EVENT
+  CAREER_EVENT
+  RELATIONSHIP_EVENT
+  RANDOM_EVENT
+  DAILY_CHALLENGE
+}
+
+enum EventRarity {
+  COMMON
+  UNCOMMON
+  RARE
+  EPIC
+  LEGENDARY
+}
+
+model EventTemplate {
+  id              String      @id @default(uuid())
+  title           String
+  description     String
+  eventType       EventType
+  rarity          EventRarity  @default(COMMON)
+
+  minAge          Int         @default(0)
+  maxAge          Int         @default(100)
+  requiredCareer  String?
+
+  isActive        Boolean     @default(true)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  decisions       DecisionTemplate[]
+  playerEvents    PlayerEvent[]
+}
+
+enum DecisionOutcomeType {
+  STAT_BOOST
+  STAT_PENALTY
+  WEALTH_CHANGE
+  RELATIONSHIP_CHANGE
+  CAREER_CHANGE
+  SPECIAL_REWARD
+}
+
+model DecisionTemplate {
+  id              String              @id @default(uuid())
+  eventId         String
+  event           EventTemplate       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  text            String
+  order           Int
+
+  outcomes        Json
+
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  playerDecisions PlayerDecision[]
+}
+
+model PlayerEvent {
+  id              String      @id @default(uuid())
+  gameId          String
+  game            GameState   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  templateId      String
+  template        EventTemplate @relation(fields: [templateId], references: [id])
+
+  yearOccurred    Int
+  monthOccurred   Int
+  ageOccurred     Int
+
+  createdAt       DateTime    @default(now())
+
+  decisions       PlayerDecision[]
+}
+
+model PlayerDecision {
+  id              String          @id @default(uuid())
+  gameId          String
+  game            GameState       @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  eventId         String
+  event           PlayerEvent     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  templateId      String
+  template        DecisionTemplate @relation(fields: [templateId], references: [id])
+
+  outcomes        Json
+  createdAt       DateTime        @default(now())
+}
+
+enum CareerType {
+  CORPORATE
+  CREATIVE
+  TECH
+  MEDICAL
+  LEGAL
+  EDUCATION
+  ENTERTAINMENT
+  ENTREPRENEUR
+}
+
+model Career {
+  id              String      @id @default(uuid())
+  name            String
+  description     String
+  type            CareerType
+
+  minIntelligence Int         @default(0)
+  minCreativity   Int         @default(0)
+  minCharisma     Int         @default(0)
+
+  baseSalary      Int
+  maxSalary       Int
+  promotionYears  Int         @default(2)
+
+  isActive        Boolean     @default(true)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  players         PlayerCareer[]
+}
+
+model PlayerCareer {
+  id              String      @id @default(uuid())
+  playerId        String
+  player          Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  careerId        String
+  career          Career      @relation(fields: [careerId], references: [id])
+
+  level           Int         @default(1)
+  currentSalary   Int
+  yearsInCareer   Int         @default(0)
+
+  isCurrent       Boolean     @default(true)
+
+  startedAt       DateTime    @default(now())
+  endedAt         DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+enum AchievementType {
+  CAREER
+  WEALTH
+  SOCIAL
+  LONGEVITY
+  SPECIAL
+}
+
+model Achievement {
+  id              String              @id @default(uuid())
+  name            String
+  description     String
+  type            AchievementType
+  icon            String?
+
+  rewardXp        Int                 @default(0)
+  rewardCurrency  Int                 @default(0)
+
+  isActive        Boolean             @default(true)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  players         PlayerAchievement[]
+}
+
+model PlayerAchievement {
+  id              String      @id @default(uuid())
+  playerId        String
+  player          Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  achievementId   String
+  achievement     Achievement @relation(fields: [achievementId], references: [id])
+
+  unlockedAt      DateTime    @default(now())
+  createdAt       DateTime    @default(now())
+}
+
+enum TransactionType {
+  IAP_PURCHASE
+  VIP_SUBSCRIPTION
+  REWARDED_AD
+  SYSTEM_GIFT
+  REFUND
+}
+
+model EconomyTransaction {
+  id              String          @id @default(uuid())
+  playerId        String
+  player          Player          @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  type            TransactionType
+  amount          Int
+  currency        String          @default("premium")
+
+  receiptId       String?
+  productId       String?
+  metadata        Json?
+
+  createdAt       DateTime        @default(now())
+}
+
+model LeaderboardEntry {
+  id              String      @id @default(uuid())
+  playerId        String      @unique
+  player          Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  score           Int         @default(0)
+  rank            Int?
+  season          String      @default("current")
+
+  updatedAt       DateTime    @updatedAt
+}

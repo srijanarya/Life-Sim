@@ -1,0 +1,88 @@
+workflow:
+  name: "Sprint 1 - Core Loop Prototype"
+  version: "1.0.0"
+  bmad_method: "BMad Method"
+  
+phases:
+  - phase: "Analysis"
+    agent: "Analyst"
+    tasks:
+      - id: "analyze_requirements"
+        description: "Analyze PRD and identify core game mechanics"
+        deliverable: "Requirements analysis document"
+      
+      - id: "identify_risks"
+        description: "Identify technical risks and dependencies"
+        deliverable: "Risk assessment document"
+  
+  - phase: "Planning"
+    agent: "PM"
+    tasks:
+      - id: "create_user_stories"
+        description: "Create user stories for core loop features"
+        deliverable: "User stories document"
+      
+      - id: "prioritize_features"
+        description: "Prioritize features for Sprint 1"
+        deliverable: "Sprint backlog"
+  
+  - phase: "Solutioning"
+    agents:
+      - role: "Architect"
+        tasks:
+          - id: "design_event_engine"
+            description: "Design event generation and decision system"
+            deliverable: "Event engine architecture"
+          
+          - id: "design_api_structure"
+            description: "Design RESTful API structure"
+            deliverable: "API specification"
+      
+      - role: "UX Designer"
+        tasks:
+          - id: "design_core_loop_ui"
+            description: "Design UI for main game loop"
+            deliverable: "UI/UX wireframes"
+  
+  - phase: "Implementation"
+    agent: "Developer"
+    tasks:
+      - id: "implement_player_service"
+        description: "Implement player profile and game state management"
+        dependencies: ["design_api_structure"]
+        deliverable: "Player service backend"
+      
+      - id: "implement_event_engine"
+        description: "Implement event generation system"
+        dependencies: ["design_event_engine"]
+        deliverable: "Event engine backend"
+      
+      - id: "implement_decision_system"
+        description: "Implement decision outcome system"
+        dependencies: ["implement_event_engine"]
+        deliverable: "Decision system backend"
+      
+      - id: "create_unity_api_client"
+        description: "Create Unity API client for backend communication"
+        dependencies: ["design_api_structure"]
+        deliverable: "Unity API client"
+      
+      - id: "implement_core_loop_ui"
+        description: "Implement core loop UI in Unity"
+        dependencies: ["implement_player_service", "implement_event_engine", "create_unity_api_client"]
+        deliverable: "Core loop UI"
+  
+  - phase: "Testing"
+    agent: "Test Architect"
+    tasks:
+      - id: "unit_tests_backend"
+        description: "Write unit tests for backend services"
+        deliverable: "Backend unit test suite"
+      
+      - id: "integration_tests_api"
+        description: "Write integration tests for API endpoints"
+        deliverable: "API integration tests"
+      
+      - id: "manual_testing_unity"
+        description: "Manual testing of Unity client"
+        deliverable: "Test report"

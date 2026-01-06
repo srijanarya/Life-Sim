@@ -1,0 +1,44 @@
+{
+  "bmadCore": {
+    "version": "6.0.0-alpha.22",
+    "outputPaths": {
+      "planningArtifacts": "_bmad-output/planning-artifacts",
+      "implementationArtifacts": "_bmad-output/implementation-artifacts",
+      "coreArtifacts": "_bmad-core",
+      "longTermKnowledge": "docs"
+    },
+    "telemetry": {
+      "enabled": false
+    }
+  },
+  "modules": {
+    "bmm-bmad-method": {
+      "enabled": true,
+      "outputPath": "_bmad-output/planning-artifacts",
+      "config": {
+        "track": "greenfield",
+        "documentationPath": "docs",
+        "customAgents": []
+      }
+    },
+    "bmb-bmad-builder": {
+      "enabled": false
+    },
+    "cis-creative-intelligence-suite": {
+      "enabled": false
+    }
+  },
+  "project": {
+    "name": "LifeCraft - Real Life Simulator",
+    "description": "A polished, scalable life simulation mobile game with deep choice impact, realistic life progression, and rich replayability.",
+    "platform": "iOS",
+    "techStack": {
+      "client": "Unity 2022.3+ (C#)",
+      "backend": "Node.js 18+ (TypeScript)",
+      "database": "PostgreSQL + Redis",
+      "orm": "Prisma"
+    },
+    "teamSize": "small",
+    "methodology": "BMAD Method"
+  }
+}
