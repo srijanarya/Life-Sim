@@ -1,10 +1,15 @@
-import { RewardedAdsService } from '../../src/services/rewarded-ads.service';
+import { RewardedAdsService } from '../src/services/rewarded-ads.service';
+import { avatarService } from '../src/services/avatar.service';
 
 describe('RewardedAdsService', () => {
   let service: RewardedAdsService;
 
   beforeEach(() => {
     service = new RewardedAdsService();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   describe('getMaxAdsForPlayer', () => {
@@ -22,6 +27,11 @@ describe('RewardedAdsService', () => {
       const max = service['getMaxAdsForPlayer']('VIP_YEARLY');
       expect(max).toBe(13);
     });
+
+    it('should default to 3 ads for unknown tiers', () => {
+      const max = service['getMaxAdsForPlayer']('UNKNOWN');
+      expect(max).toBe(3);
+    });
   });
 
   describe('getAdTypes', () => {
@@ -31,8 +41,21 @@ describe('RewardedAdsService', () => {
       expect(types).toHaveProperty('DAILY_AD');
       expect(types).toHaveProperty('EXTRA_LIFE');
       expect(types).toHaveProperty('BOOST_STATS');
+      expect(types).toHaveProperty('DOUBLE_REWARD');
+      expect(types).toHaveProperty('SKIP_WAIT');
+      
       expect(types.DAILY_AD).toHaveProperty('premium');
       expect(types.DAILY_AD).toHaveProperty('gameCurrency');
+      expect(types.DAILY_AD.premium).toBeGreaterThan(0);
+    });
+
+    it('should have positive reward amounts', () => {
+      const types = service.getAdTypes();
+      
+      Object.values(types).forEach(type => {
+        if (type.premium) expect(type.premium).toBeGreaterThan(0);
+        if (type.gameCurrency) expect(type.gameCurrency).toBeGreaterThan(0);
+      });
     });
   });
 });
