@@ -1,0 +1,176 @@
+[
+  {
+    "title": "Health Emergency",
+    "description": "You experience a medical emergency. What do you do?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "RARE",
+    "minAge": 18,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Seek immediate medical help",
+        "order": 1,
+        "outcomes": {
+          "healthBoost": 10,
+          "happinessBoost": 3,
+          "wealthChange": -2000
+        }
+      },
+      {
+        "text": "Wait to see if it improves",
+        "order": 2,
+        "outcomes": {
+          "healthPenalty": 15,
+          "happinessPenalty": 5
+        }
+      },
+      {
+        "text": "Self-diagnose and treat",
+        "order": 3,
+        "outcomes": {
+          "healthPenalty": 20,
+          "happinessPenalty": 8
+        }
+      }
+    ]
+  },
+  {
+    "title": "Sleep Issues",
+    "description": "You're having trouble sleeping. How do you address it?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Establish healthy sleep routine",
+        "order": 1,
+        "outcomes": {
+          "healthBoost": 8,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Try relaxation techniques",
+        "order": 2,
+        "outcomes": {
+          "healthBoost": 4,
+          "happinessBoost": 3
+        }
+      },
+      {
+        "text": "Use sleep aids",
+        "order": 3,
+        "outcomes": {
+          "healthBoost": 5,
+          "wealthChange": -50
+        }
+      }
+    ]
+  },
+  {
+    "title": "Diet Change",
+    "description": "You're considering changing your diet. What approach do you take?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 16,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Adopt healthier eating habits",
+        "order": 1,
+        "outcomes": {
+          "healthBoost": 12,
+          "happinessBoost": 5,
+          "wealthChange": -200
+        }
+      },
+      {
+        "text": "Make gradual changes",
+        "order": 2,
+        "outcomes": {
+          "healthBoost": 6,
+          "happinessBoost": 3
+        }
+      },
+      {
+        "text": "Not ready to change yet",
+        "order": 3,
+        "outcomes": {
+          "healthPenalty": 3
+        }
+      }
+    ]
+  },
+  {
+    "title": "Stress Management",
+    "description": "You've been feeling stressed lately. How do you cope?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Practice mindfulness/meditation",
+        "order": 1,
+        "outcomes": {
+          "healthBoost": 10,
+          "happinessBoost": 10,
+          "intelligenceBoost": 3
+        }
+      },
+      {
+        "text": "Exercise to relieve stress",
+        "order": 2,
+        "outcomes": {
+          "physicalBoost": 10,
+          "healthBoost": 8,
+          "happinessBoost": 7
+        }
+      },
+      {
+        "text": "Seek professional help",
+        "order": 3,
+        "outcomes": {
+          "healthBoost": 12,
+          "happinessBoost": 8,
+          "wealthChange": -300
+        }
+      }
+    ]
+  },
+  {
+    "title": "Preventive Care",
+    "description": "It's time for preventive health screenings. Do you go?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 25,
+    "maxAge": 75,
+    "decisions": [
+      {
+        "text": "Complete all recommended screenings",
+        "order": 1,
+        "outcomes": {
+          "healthBoost": 15,
+          "happinessBoost": 5,
+          "wealthChange": -400
+        }
+      },
+      {
+        "text": "Prioritize only important ones",
+        "order": 2,
+        "outcomes": {
+          "healthBoost": 8,
+          "wealthChange": -200
+        }
+      },
+      {
+        "text": "Delay for now",
+        "order": 3,
+        "outcomes": {
+          "healthPenalty": 5
+        }
+      }
+    ]
+  }
+]

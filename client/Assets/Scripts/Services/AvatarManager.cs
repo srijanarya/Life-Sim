@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using LifeCraft.Core;
 
 namespace LifeCraft.Services
 {
-    public class AvatarManager
+    public class AvatarManager : MonoBehaviour
     {
         public static AvatarManager Instance { get; private set; }
 

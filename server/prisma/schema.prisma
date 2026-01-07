@@ -113,6 +113,12 @@ model EventTemplate {
   minAge          Int         @default(0)
   maxAge          Int         @default(100)
   requiredCareer  String?
+  requiredRelationship Boolean?
+
+  minStats        Json?
+  weightMultiplier Float?
+  followUpEvent   String?
+  cooldownYears   Int?
 
   isActive        Boolean     @default(true)
   createdAt       DateTime    @default(now())

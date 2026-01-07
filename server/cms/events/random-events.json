@@ -1,0 +1,169 @@
+[
+  {
+    "title": "Street Festival",
+    "description": "A vibrant street festival is happening nearby. Do you attend?",
+    "eventType": "RANDOM_EVENT",
+    "rarity": "COMMON",
+    "minAge": 16,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Join the festivities",
+        "order": 1,
+        "outcomes": {
+          "happinessBoost": 8,
+          "charismaBoost": 3,
+          "wealthChange": -50
+        }
+      },
+      {
+        "text": "Walk through and look around",
+        "order": 2,
+        "outcomes": {
+          "happinessBoost": 4,
+          "wealthChange": -20
+        }
+      },
+      {
+        "text": "Stay home",
+        "order": 3,
+        "outcomes": {}
+      }
+    ]
+  },
+  {
+    "title": "Unexpected Gift",
+    "description": "A stranger gives you a small, unexpected gift. What do you do?",
+    "eventType": "RANDOM_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 70,
+    "decisions": [
+      {
+        "text": "Accept graciously",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 5,
+          "happinessBoost": 7
+        }
+      },
+      {
+        "text": "Politely decline",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 3
+        }
+      },
+      {
+        "text": "Feel suspicious",
+        "order": 3,
+        "outcomes": {
+          "intelligenceBoost": 3,
+          "happinessPenalty": 2
+        }
+      }
+    ]
+  },
+  {
+    "title": "Lost Wallet",
+    "description": "You found a wallet with money inside. What do you do?",
+    "eventType": "RANDOM_EVENT",
+    "rarity": "RARE",
+    "minAge": 18,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Try to return it to the owner",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 10,
+          "happinessBoost": 12,
+          "intelligenceBoost": 3
+        }
+      },
+      {
+        "text": "Turn it in to authorities",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 5,
+          "happinessBoost": 8
+        }
+      },
+      {
+        "text": "Keep the money",
+        "order": 3,
+        "outcomes": {
+          "wealthChange": 200,
+          "happinessPenalty": 10,
+          "charismaPenalty": 5
+        }
+      }
+    ]
+  },
+  {
+    "title": "Weather Emergency",
+    "description": "A severe storm is approaching. How do you prepare?",
+    "eventType": "RANDOM_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Prepare thoroughly",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 5,
+          "healthBoost": 5,
+          "wealthChange": -300
+        }
+      },
+      {
+        "text": "Do minimal preparations",
+        "order": 2,
+        "outcomes": {
+          "healthBoost": 2,
+          "wealthChange": -100
+        }
+      },
+      {
+        "text": "Hope it passes quickly",
+        "order": 3,
+        "outcomes": {
+          "healthPenalty": 8
+        }
+      }
+    ]
+  },
+  {
+    "title": "Old Friend Reconnect",
+    "description": "An old friend reaches out to you. Do you respond?",
+    "eventType": "RANDOM_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 20,
+    "maxAge": 70,
+    "decisions": [
+      {
+        "text": "Meet up and catch up",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 7,
+          "happinessBoost": 10
+        }
+      },
+      {
+        "text": "Message back slowly",
+        "order": 2,
+        "outcomes": {
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Politely decline",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 3
+        }
+      }
+    ]
+  }
+]

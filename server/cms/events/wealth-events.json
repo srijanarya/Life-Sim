@@ -1,0 +1,189 @@
+[
+  {
+    "title": "Business Venture",
+    "description": "An opportunity to start your own business arises. Do you take the risk?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "RARE",
+    "minAge": 25,
+    "maxAge": 55,
+    "minStats": {
+      "wealth": 10000,
+      "intelligence": 60
+    },
+    "decisions": [
+      {
+        "text": "Invest heavily and launch",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 15,
+          "charismaBoost": 10,
+          "wealthChange": -20000,
+          "happinessBoost": 12
+        }
+      },
+      {
+        "text": "Start small and grow",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 8,
+          "wealthChange": -5000,
+          "happinessBoost": 8
+        }
+      },
+      {
+        "text": "Wait for better timing",
+        "order": 3,
+        "outcomes": {
+          "wealthChange": 1000
+        }
+      }
+    ]
+  },
+  {
+    "title": "Investment Opportunity",
+    "description": "A promising investment opportunity has come your way.",
+    "eventType": "LIFE_EVENT",
+    "rarity": "RARE",
+    "minAge": 20,
+    "maxAge": 70,
+    "minStats": {
+      "wealth": 5000,
+      "intelligence": 50
+    },
+    "decisions": [
+      {
+        "text": "Invest substantially",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 10,
+          "wealthChange": -10000,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Invest conservatively",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 5,
+          "wealthChange": -3000
+        }
+      },
+      {
+        "text": "Research more first",
+        "order": 3,
+        "outcomes": {
+          "intelligenceBoost": 3
+        }
+      }
+    ]
+  },
+  {
+    "title": "Real Estate",
+    "description": "You have the opportunity to purchase property. What do you decide?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "RARE",
+    "minAge": 25,
+    "maxAge": 60,
+    "minStats": {
+      "wealth": 50000
+    },
+    "decisions": [
+      {
+        "text": "Buy the property",
+        "order": 1,
+        "outcomes": {
+          "happinessBoost": 15,
+          "wealthChange": -80000,
+          "intelligenceBoost": 8
+        }
+      },
+      {
+        "text": "Consider it longer",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 5
+        }
+      },
+      {
+        "text": "Pass on this opportunity",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 5
+        }
+      }
+    ]
+  },
+  {
+    "title": "Inheritance",
+    "description": "A distant relative has left you a significant inheritance.",
+    "eventType": "LIFE_EVENT",
+    "rarity": "LEGENDARY",
+    "minAge": 18,
+    "maxAge": 70,
+    "weightMultiplier": 0.02,
+    "decisions": [
+      {
+        "text": "Accept and manage wisely",
+        "order": 1,
+        "outcomes": {
+          "wealthChange": 150000,
+          "happinessBoost": 20,
+          "intelligenceBoost": 5
+        }
+      },
+      {
+        "text": "Donate a portion",
+        "order": 2,
+        "outcomes": {
+          "wealthChange": 100000,
+          "happinessBoost": 25,
+          "charismaBoost": 10
+        }
+      },
+      {
+        "text": "Invest all of it",
+        "order": 3,
+        "outcomes": {
+          "wealthChange": 200000,
+          "intelligenceBoost": 15,
+          "happinessBoost": 10
+        }
+      }
+    ]
+  },
+  {
+    "title": "Career Change",
+    "description": "You're considering a complete career change. Do you take the leap?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "RARE",
+    "minAge": 25,
+    "maxAge": 55,
+    "decisions": [
+      {
+        "text": "Pursue new passion",
+        "order": 1,
+        "outcomes": {
+          "happinessBoost": 15,
+          "creativityBoost": 10,
+          "wealthChange": -10000
+        }
+      },
+      {
+        "text": "Keep current job for stability",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 3,
+          "happinessPenalty": 3
+        }
+      },
+      {
+        "text": "Build skills for future transition",
+        "order": 3,
+        "outcomes": {
+          "intelligenceBoost": 8,
+          "creativityBoost": 5
+        }
+      }
+    ]
+  }
+]

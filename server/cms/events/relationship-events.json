@@ -1,0 +1,173 @@
+[
+  {
+    "title": "First Date",
+    "description": "You've been asked out on a date. What do you do?",
+    "eventType": "RELATIONSHIP_EVENT",
+    "rarity": "COMMON",
+    "minAge": 16,
+    "maxAge": 50,
+    "decisions": [
+      {
+        "text": "Accept enthusiastically",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 5,
+          "happinessBoost": 8
+        }
+      },
+      {
+        "text": "Accept but be cautious",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 3,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Decline politely",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 3
+        }
+      }
+    ]
+  },
+  {
+    "title": "Marriage Proposal",
+    "description": "Your partner has proposed! What's your answer?",
+    "eventType": "RELATIONSHIP_EVENT",
+    "rarity": "RARE",
+    "minAge": 18,
+    "maxAge": 60,
+    "requiredRelationship": true,
+    "decisions": [
+      {
+        "text": "Say yes!",
+        "order": 1,
+        "outcomes": {
+          "happinessBoost": 20,
+          "charismaBoost": 5,
+          "relationshipChange": true
+        }
+      },
+      {
+        "text": "Ask for more time to decide",
+        "order": 2,
+        "outcomes": {
+          "happinessBoost": 5,
+          "intelligenceBoost": 3
+        }
+      },
+      {
+        "text": "Decline gently",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 15,
+          "charismaBoost": 3,
+          "relationshipChange": false
+        }
+      }
+    ]
+  },
+  {
+    "title": "Make New Friend",
+    "description": "You meet someone interesting at a social event. Do you introduce yourself?",
+    "eventType": "RELATIONSHIP_EVENT",
+    "rarity": "COMMON",
+    "minAge": 15,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Introduce yourself confidently",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 5,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Wait for them to approach you",
+        "order": 2,
+        "outcomes": {
+          "happinessBoost": 2
+        }
+      },
+      {
+        "text": "Stay in your comfort zone",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 3
+        }
+      }
+    ]
+  },
+  {
+    "title": "Family Reunion",
+    "description": "Your extended family is having a reunion. Will you attend?",
+    "eventType": "RELATIONSHIP_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 70,
+    "decisions": [
+      {
+        "text": "Attend and reconnect",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 8,
+          "happinessBoost": 10
+        }
+      },
+      {
+        "text": "Stop by briefly",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 3,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Skip it this year",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 5
+        }
+      }
+    ]
+  },
+  {
+    "title": "Relationship Conflict",
+    "description": "You and your partner are arguing about finances. How do you resolve it?",
+    "eventType": "RELATIONSHIP_EVENT",
+    "rarity": "COMMON",
+    "minAge": 18,
+    "maxAge": 65,
+    "requiredRelationship": true,
+    "decisions": [
+      {
+        "text": "Have a calm, open discussion",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 7,
+          "intelligenceBoost": 5,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Compromise for peace",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 4,
+          "happinessBoost": 3
+        }
+      },
+      {
+        "text": "Stand your ground",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 10,
+          "charismaBoost": 2
+        }
+      }
+    ]
+  }
+]

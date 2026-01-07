@@ -2,7 +2,13 @@ import { prisma } from '@config/database';
 import { redis } from '@config/redis';
 import { logger } from '@config/logger';
 import { config } from '@config/index';
-import { GameState, PlayerEvent, EventTemplate, EventType } from '@types/game';
+import {
+  GameState,
+  PlayerEvent,
+  EventTemplate,
+  EventType,
+  PlayerProfile,
+} from '@types/game';
 import { randomInt } from 'crypto';
 
 export class EventEngine {
@@ -17,6 +23,7 @@ export class EventEngine {
 
   async generateEvent(
     gameState: GameState,
+    playerProfile: PlayerProfile,
     previousEvents: string[] = []
   ): Promise<EventTemplate | null> {
     try {
@@ -28,34 +35,76 @@ export class EventEngine {
           isActive: true,
           minAge: { lte: age },
           maxAge: { gte: age },
-          requiredCareer: careerId || null,
+          requiredCareer: careerId || undefined,
+          requiredRelationship: gameState.isInRelationship ? true : undefined,
           id: { notIn: previousEvents },
         },
-        orderBy: { rarity: 'asc' },
+        include: { decisions: true },
       });
 
-      if (events.length === 0) {
+      const filteredEvents = await this.filterEventsByStatsAndCooldowns(
+        events,
+        gameState,
+        playerProfile
+      );
+
+      if (filteredEvents.length === 0) {
         logger.warn(`No events available for age ${age}`);
         return null;
       }
 
-      const selectedEvent = this.selectWeightedEvent(events);
+      const selectedEvent = this.selectWeightedEvent(
+        filteredEvents,
+        playerProfile
+      );
       logger.debug(
         `Generated event "${selectedEvent.title}" for player at age ${age}`
       );
 
-      return selectedEvent;
+      return selectedEvent as unknown as EventTemplate;
     } catch (error) {
       logger.error('Failed to generate event:', error);
       throw error;
     }
   }
 
-  private selectWeightedEvent(events: EventTemplate[]): EventTemplate {
-    const weightedEvents: Array<{ event: EventTemplate; weight: number }> = [];
+  private async filterEventsByStatsAndCooldowns(
+    events: any[],
+    gameState: GameState,
+    playerProfile: PlayerProfile
+  ): Promise<any[]> {
+    const eligibleEvents: any[] = [];
 
     for (const event of events) {
-      const weight = this.EVENT_WEIGHTS[event.rarity];
+      if (!this.meetsStatThresholds(event, playerProfile)) {
+        continue;
+      }
+
+      if (await this.isOnCooldown(event, gameState)) {
+        continue;
+      }
+
+      eligibleEvents.push(event);
+    }
+
+    return filteredEvents;
+  }
+
+  private selectWeightedEvent(
+    events: any[],
+    playerProfile: PlayerProfile
+  ): any {
+    const weightedEvents: Array<{ event: any; weight: number }> = [];
+
+    for (const event of events) {
+      let weight = this.EVENT_WEIGHTS[event.rarity];
+
+      weight = this.applyStatBasedAdjustments(weight, event, playerProfile);
+
+      if (event.weightMultiplier) {
+        weight *= event.weightMultiplier;
+      }
+
       weightedEvents.push({ event, weight });
     }
 
@@ -70,6 +119,95 @@ export class EventEngine {
     }
 
     return weightedEvents[0].event;
+  }
+
+  private meetsStatThresholds(event: any, profile: PlayerProfile): boolean {
+    if (!event.minStats) {
+      return true;
+    }
+
+    const minStats = event.minStats as any;
+    const stats = {
+      health: profile.health,
+      happiness: profile.happiness,
+      wealth: profile.wealth,
+      intelligence: profile.intelligence,
+      charisma: profile.charisma,
+      physical: profile.physical,
+      creativity: profile.creativity,
+    };
+
+    for (const [stat, min] of Object.entries(minStats)) {
+      if (stats[stat as keyof typeof stats] < (min as number)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private async isOnCooldown(event: any, gameState: GameState): Promise<boolean> {
+    if (!event.cooldownYears) {
+      return false;
+    }
+
+    const cooldownKey = `game:${gameState.id}:event-cooldown:${event.id}`;
+    return await redis.get(cooldownKey) !== null;
+  }
+
+  private applyStatBasedAdjustments(
+    baseWeight: number,
+    event: any,
+    profile: PlayerProfile
+  ): number {
+    let adjustedWeight = baseWeight;
+    const stats = {
+      health: profile.health,
+      happiness: profile.happiness,
+      wealth: profile.wealth,
+      intelligence: profile.intelligence,
+      charisma: profile.charisma,
+      physical: profile.physical,
+      creativity: profile.creativity,
+    };
+
+    if (event.minStats) {
+      const minStats = event.minStats as any;
+      const matchingStats = Object.entries(minStats).filter(
+        ([stat, min]) => stats[stat as keyof typeof stats] >= (min as number)
+      ).length;
+
+      const missingStats = Object.entries(minStats).filter(
+        ([stat, min]) => stats[stat as keyof typeof stats] < (min as number)
+      ).length;
+
+      if (matchingStats > 0) {
+        adjustedWeight *= 1 + matchingStats * 0.1;
+      }
+
+      if (missingStats > 0) {
+        adjustedWeight *= 0.5 * missingStats;
+      }
+    }
+
+    if (event.eventType === 'CAREER_EVENT' && event.requiredCareer) {
+      adjustedWeight *= 1.3;
+    }
+
+    if (profile.happiness < 30 && event.eventType === 'LIFE_EVENT') {
+      adjustedWeight *= 1.2;
+    } else if (profile.happiness > 80 && event.eventType === 'RANDOM_EVENT') {
+      adjustedWeight *= 1.15;
+    }
+
+    if (profile.wealth > 1000000) {
+      const eventTitle = event.title?.toLowerCase() || '';
+      if (eventTitle.includes('invest') || eventTitle.includes('business')) {
+        adjustedWeight *= 1.25;
+      }
+    }
+
+    return Math.round(adjustedWeight);
   }
 
   async recordEvent(

@@ -1,0 +1,189 @@
+[
+  {
+    "title": "Tech Startup",
+    "description": "You have an idea for a tech startup. Do you pursue it?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "EPIC",
+    "minAge": 22,
+    "maxAge": 50,
+    "minStats": {
+      "intelligence": 70,
+      "creativity": 75
+    },
+    "decisions": [
+      {
+        "text": "Go all in on startup",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 20,
+          "creativityBoost": 20,
+          "charismaBoost": 10,
+          "wealthChange": -50000,
+          "happinessBoost": 20
+        }
+      },
+      {
+        "text": "Start as side project",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 10,
+          "creativityBoost": 10,
+          "wealthChange": -10000
+        }
+      },
+      {
+        "text": "Keep it as an idea for now",
+        "order": 3,
+        "outcomes": {
+          "creativityBoost": 5
+        }
+      }
+    ]
+  },
+  {
+    "title": "Promotion to Senior Role",
+    "description": "You've been offered a senior position with more responsibility.",
+    "eventType": "CAREER_EVENT",
+    "rarity": "RARE",
+    "minAge": 28,
+    "maxAge": 60,
+    "decisions": [
+      {
+        "text": "Accept the promotion",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 10,
+          "charismaBoost": 10,
+          "wealthChange": 20000,
+          "happinessBoost": 15
+        }
+      },
+      {
+        "text": "Negotiate better terms",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 8,
+          "wealthChange": 25000,
+          "happinessBoost": 12
+        }
+      },
+      {
+        "text": "Decline due to work-life balance",
+        "order": 3,
+        "outcomes": {
+          "happinessBoost": 8,
+          "healthBoost": 5
+        }
+      }
+    ]
+  },
+  {
+    "title": "Job Relocation",
+    "description": "Your company offers you a position in another city. Do you move?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 22,
+    "maxAge": 55,
+    "decisions": [
+      {
+        "text": "Accept relocation opportunity",
+        "order": 1,
+        "outcomes": {
+          "wealthChange": 15000,
+          "happinessBoost": 8,
+          "charismaBoost": 5
+        }
+      },
+      {
+        "text": "Negotiate for remote work",
+        "order": 2,
+        "outcomes": {
+          "wealthChange": 5000,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Decline and stay put",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 5
+        }
+      }
+    ]
+  },
+  {
+    "title": "Industry Recognition",
+    "description": "Your work is recognized at a major industry conference!",
+    "eventType": "CAREER_EVENT",
+    "rarity": "EPIC",
+    "minAge": 25,
+    "maxAge": 65,
+    "minStats": {
+      "intelligence": 75,
+      "creativity": 70
+    },
+    "decisions": [
+      {
+        "text": "Accept awards graciously",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 15,
+          "happinessBoost": 20,
+          "wealthChange": 10000
+        }
+      },
+      {
+        "text": "Humble acknowledgment",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 10,
+          "happinessBoost": 15,
+          "wealthChange": 5000
+        }
+      },
+      {
+        "text": "Use platform for advocacy",
+        "order": 3,
+        "outcomes": {
+          "charismaBoost": 12,
+          "intelligenceBoost": 5,
+          "happinessBoost": 12
+        }
+      }
+    ]
+  },
+  {
+    "title": "Mentoring Opportunity",
+    "description": "You've been asked to mentor a junior employee. Do you accept?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 30,
+    "maxAge": 65,
+    "decisions": [
+      {
+        "text": "Accept enthusiastically",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 10,
+          "intelligenceBoost": 5,
+          "happinessBoost": 8
+        }
+      },
+      {
+        "text": "Accept but set boundaries",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 5,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Decline due to workload",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 3
+        }
+      }
+    ]
+  }
+]

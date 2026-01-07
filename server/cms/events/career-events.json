@@ -1,0 +1,175 @@
+[
+  {
+    "title": "Job Interview",
+    "description": "You have an important job interview today. How do you prepare?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "COMMON",
+    "minAge": 18,
+    "maxAge": 65,
+    "decisions": [
+      {
+        "text": "Prepare thoroughly for days",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 5,
+          "charismaBoost": 3,
+          "happinessBoost": 2
+        }
+      },
+      {
+        "text": "Wing it with confidence",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 5,
+          "happinessBoost": 3
+        }
+      },
+      {
+        "text": "Study the company thoroughly",
+        "order": 3,
+        "outcomes": {
+          "intelligenceBoost": 8,
+          "wealthChange": 0
+        }
+      }
+    ]
+  },
+  {
+    "title": "Promotion Opportunity",
+    "description": "Your boss has hinted at a possible promotion. What's your move?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 20,
+    "maxAge": 60,
+    "requiredCareer": "software-engineer-career-id",
+    "decisions": [
+      {
+        "text": "Ask for the promotion directly",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 7,
+          "happinessBoost": 10,
+          "wealthChange": 5000
+        }
+      },
+      {
+        "text": "Work extra hard to prove yourself",
+        "order": 2,
+        "outcomes": {
+          "physicalPenalty": 5,
+          "happinessPenalty": 3,
+          "wealthChange": 2000
+        }
+      },
+      {
+        "text": "Wait for it to happen naturally",
+        "order": 3,
+        "outcomes": {
+          "wealthChange": 0
+        }
+      }
+    ]
+  },
+  {
+    "title": "Job Offer",
+    "description": "A competitor company has made you an attractive offer. Do you switch jobs?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 22,
+    "maxAge": 55,
+    "decisions": [
+      {
+        "text": "Accept the offer immediately",
+        "order": 1,
+        "outcomes": {
+          "wealthChange": 15000,
+          "happinessBoost": 8
+        }
+      },
+      {
+        "text": "Negotiate for better terms",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 5,
+          "wealthChange": 20000,
+          "intelligenceBoost": 3
+        }
+      },
+      {
+        "text": "Decline and stay loyal",
+        "order": 3,
+        "outcomes": {
+          "charismaBoost": 3,
+          "happinessPenalty": 5
+        }
+      }
+    ]
+  },
+  {
+    "title": "Workplace Conflict",
+    "description": "A colleague has taken credit for your work. How do you handle it?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "COMMON",
+    "minAge": 18,
+    "maxAge": 65,
+    "decisions": [
+      {
+        "text": "Confront them privately",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 4,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Report to management",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 3,
+          "happinessPenalty": 5
+        }
+      },
+      {
+        "text": "Let it go this time",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 8,
+          "charismaBoost": 2
+        }
+      }
+    ]
+  },
+  {
+    "title": "Training Opportunity",
+    "description": "Your company offers to pay for advanced training. Do you accept?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 20,
+    "maxAge": 50,
+    "decisions": [
+      {
+        "text": "Enroll immediately",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 15,
+          "wealthChange": -2000
+        }
+      },
+      {
+        "text": "Consider it carefully first",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 5,
+          "happinessBoost": 2
+        }
+      },
+      {
+        "text": "Decline due to time constraints",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 3
+        }
+      }
+    ]
+  }
+]

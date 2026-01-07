@@ -1,0 +1,177 @@
+[
+  {
+    "title": "Social Gathering",
+    "description": "Friends are organizing a get-together. Will you attend?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "COMMON",
+    "minAge": 18,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Attend and socialize",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 8,
+          "happinessBoost": 10,
+          "wealthChange": -50
+        }
+      },
+      {
+        "text": "Make a brief appearance",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 4,
+          "happinessBoost": 5,
+          "wealthChange": -25
+        }
+      },
+      {
+        "text": "Decline politely",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 3
+        }
+      }
+    ]
+  },
+  {
+    "title": "Networking Event",
+    "description": "A professional networking event is happening. Do you go?",
+    "eventType": "CAREER_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 20,
+    "maxAge": 65,
+    "decisions": [
+      {
+        "text": "Network actively",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 12,
+          "intelligenceBoost": 5,
+          "happinessBoost": 5,
+          "wealthChange": -100
+        }
+      },
+      {
+        "text": "Observe and learn",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 8,
+          "charismaBoost": 4
+        }
+      },
+      {
+        "text": "Skip this event",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 2
+        }
+      }
+    ]
+  },
+  {
+    "title": "Community Project",
+    "description": "Your community is organizing improvement projects. Do you help?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 75,
+    "decisions": [
+      {
+        "text": "Lead a project",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 15,
+          "intelligenceBoost": 8,
+          "happinessBoost": 12
+        }
+      },
+      {
+        "text": "Participate actively",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 8,
+          "happinessBoost": 8
+        }
+      },
+      {
+        "text": "Make a donation instead",
+        "order": 3,
+        "outcomes": {
+          "charismaBoost": 5,
+          "wealthChange": -200
+        }
+      }
+    ]
+  },
+  {
+    "title": "Family Crisis",
+    "description": "A family member needs urgent help. How do you respond?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "RARE",
+    "minAge": 18,
+    "maxAge": 70,
+    "decisions": [
+      {
+        "text": "Drop everything and help",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 12,
+          "happinessBoost": 10,
+          "wealthChange": -500
+        }
+      },
+      {
+        "text": "Help when possible",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 6,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Offer resources only",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 8,
+          "wealthChange": -300
+        }
+      }
+    ]
+  },
+  {
+    "title": "Neighbor Dispute",
+    "description": "A dispute has arisen with your neighbor. How do you handle it?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "COMMON",
+    "minAge": 18,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Discuss calmly and resolve",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 8,
+          "intelligenceBoost": 5,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Compromise for peace",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 4,
+          "happinessBoost": 3
+        }
+      },
+      {
+        "text": "Stand your ground",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 5,
+          "charismaBoost": 2
+        }
+      }
+    ]
+  }
+]

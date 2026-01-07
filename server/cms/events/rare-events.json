@@ -1,0 +1,194 @@
+[
+  {
+    "title": "Lottery Win",
+    "description": "You won a substantial lottery prize! How do you handle it?",
+    "eventType": "RANDOM_EVENT",
+    "rarity": "LEGENDARY",
+    "minAge": 18,
+    "maxAge": 70,
+    "weightMultiplier": 0.1,
+    "decisions": [
+      {
+        "text": "Invest wisely and live modestly",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 10,
+          "happinessBoost": 20,
+          "wealthChange": 100000
+        }
+      },
+      {
+        "text": "Treat yourself and loved ones",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 8,
+          "happinessBoost": 30,
+          "wealthChange": 50000
+        }
+      },
+      {
+        "text": "Donate to charity",
+        "order": 3,
+        "outcomes": {
+          "charismaBoost": 15,
+          "happinessBoost": 25,
+          "wealthChange": 30000
+        }
+      }
+    ]
+  },
+  {
+    "title": "Celebrity Encounter",
+    "description": "You meet a famous person by chance. What do you do?",
+    "eventType": "RANDOM_EVENT",
+    "rarity": "EPIC",
+    "minAge": 18,
+    "maxAge": 70,
+    "decisions": [
+      {
+        "text": "Approach respectfully",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 10,
+          "happinessBoost": 15
+        }
+      },
+      {
+        "text": "Take a photo from distance",
+        "order": 2,
+        "outcomes": {
+          "happinessBoost": 8
+        }
+      },
+      {
+        "text": "Respect their privacy",
+        "order": 3,
+        "outcomes": {
+          "charismaBoost": 5,
+          "happinessBoost": 5
+        }
+      }
+    ]
+  },
+  {
+    "title": "Career Breakthrough",
+    "description": "Your innovative idea could revolutionize your industry!",
+    "eventType": "CAREER_EVENT",
+    "rarity": "LEGENDARY",
+    "minAge": 25,
+    "maxAge": 60,
+    "minStats": {
+      "intelligence": 75,
+      "creativity": 80
+    },
+    "decisions": [
+      {
+        "text": "Pursue it passionately",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 20,
+          "creativityBoost": 20,
+          "wealthChange": 50000,
+          "happinessBoost": 25
+        }
+      },
+      {
+        "text": "Research and plan carefully",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 15,
+          "wealthChange": 30000,
+          "happinessBoost": 15
+        }
+      },
+      {
+        "text": "Share with colleagues",
+        "order": 3,
+        "outcomes": {
+          "charismaBoost": 15,
+          "happinessBoost": 12
+        }
+      }
+    ]
+  },
+  {
+    "title": "Epic Adventure",
+    "description": "An incredible travel opportunity presents itself. Do you seize it?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "EPIC",
+    "minAge": 20,
+    "maxAge": 65,
+    "minStats": {
+      "wealth": 5000
+    },
+    "decisions": [
+      {
+        "text": "Go on the adventure",
+        "order": 1,
+        "outcomes": {
+          "happinessBoost": 30,
+          "charismaBoost": 10,
+          "intelligenceBoost": 8,
+          "wealthChange": -8000
+        }
+      },
+      {
+        "text": "Plan for a future trip",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 5,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Decline and focus on work",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 10,
+          "wealthChange": 2000
+        }
+      }
+    ]
+  },
+  {
+    "title": "Royal Opportunity",
+    "description": "A once-in-a-lifetime opportunity involving high society arises!",
+    "eventType": "RANDOM_EVENT",
+    "rarity": "LEGENDARY",
+    "minAge": 25,
+    "maxAge": 65,
+    "minStats": {
+      "charisma": 70,
+      "wealth": 10000
+    },
+    "weightMultiplier": 0.05,
+    "decisions": [
+      {
+        "text": "Embrace the opportunity",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 25,
+          "happinessBoost": 30,
+          "wealthChange": 20000
+        }
+      },
+      {
+        "text": "Approach with caution",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 10,
+          "intelligenceBoost": 10,
+          "happinessBoost": 15
+        }
+      },
+      {
+        "text": "Decline gracefully",
+        "order": 3,
+        "outcomes": {
+          "charismaBoost": 5,
+          "happinessPenalty": 5
+        }
+      }
+    ]
+  }
+]

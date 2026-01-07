@@ -1,0 +1,201 @@
+[
+  {
+    "title": "Join Club",
+    "description": "There's a club or organization that interests you. Do you join?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 70,
+    "decisions": [
+      {
+        "text": "Join enthusiastically",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 8,
+          "happinessBoost": 10,
+          "wealthChange": -200
+        }
+      },
+      {
+        "text": "Attend as guest first",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 4,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Not interested right now",
+        "order": 3,
+        "outcomes": {}
+      }
+    ]
+  },
+  {
+    "title": "Volunteer Opportunity",
+    "description": "A local charity needs volunteers. Will you help?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 16,
+    "maxAge": 75,
+    "decisions": [
+      {
+        "text": "Volunteer regularly",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 10,
+          "happinessBoost": 15,
+          "wealthChange": -100
+        }
+      },
+      {
+        "text": "Help occasionally",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 5,
+          "happinessBoost": 8
+        }
+      },
+      {
+        "text": "Decline for now",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 3
+        }
+      }
+    ]
+  },
+  {
+    "title": "New Hobby",
+    "description": "You're curious about a new hobby. Do you start?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "COMMON",
+    "minAge": 15,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Dive in completely",
+        "order": 1,
+        "outcomes": {
+          "creativityBoost": 12,
+          "happinessBoost": 10,
+          "wealthChange": -300
+        }
+      },
+      {
+        "text": "Try it out casually",
+        "order": 2,
+        "outcomes": {
+          "creativityBoost": 5,
+          "happinessBoost": 5,
+          "wealthChange": -100
+        }
+      },
+      {
+        "text": "Maybe later",
+        "order": 3,
+        "outcomes": {}
+      }
+    ]
+  },
+  {
+    "title": "Educational Course",
+    "description": "An interesting course is available online. Do you enroll?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 65,
+    "decisions": [
+      {
+        "text": "Enroll and complete",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 15,
+          "creativityBoost": 5,
+          "wealthChange": -400
+        }
+      },
+      {
+        "text": "Study free materials",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 8,
+          "creativityBoost": 3
+        }
+      },
+      {
+        "text": "Too busy right now",
+        "order": 3,
+        "outcomes": {}
+      }
+    ]
+  },
+  {
+    "title": "Public Speaking",
+    "description": "You're asked to speak at an event. Do you accept?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 20,
+    "maxAge": 70,
+    "decisions": [
+      {
+        "text": "Accept and prepare well",
+        "order": 1,
+        "outcomes": {
+          "charismaBoost": 12,
+          "intelligenceBoost": 8,
+          "happinessBoost": 8
+        }
+      },
+      {
+        "text": "Accept with minimal prep",
+        "order": 2,
+        "outcomes": {
+          "charismaBoost": 6,
+          "happinessBoost": 4
+        }
+      },
+      {
+        "text": "Decline politely",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 3
+        }
+      }
+    ]
+  },
+  {
+    "title": "Fitness Challenge",
+    "description": "Friends invite you to join a fitness challenge. Do you join?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 16,
+    "maxAge": 70,
+    "decisions": [
+      {
+        "text": "Commit fully to challenge",
+        "order": 1,
+        "outcomes": {
+          "physicalBoost": 15,
+          "healthBoost": 10,
+          "happinessBoost": 10,
+          "charismaBoost": 5
+        }
+      },
+      {
+        "text": "Participate casually",
+        "order": 2,
+        "outcomes": {
+          "physicalBoost": 8,
+          "healthBoost": 5,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Not this time",
+        "order": 3,
+        "outcomes": {}
+      }
+    ]
+  }
+]

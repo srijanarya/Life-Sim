@@ -1,0 +1,212 @@
+[
+  {
+    "title": "Health Checkup",
+    "description": "It's time for your annual health checkup. Do you go?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "COMMON",
+    "minAge": 18,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "Go for a comprehensive checkup",
+        "order": 1,
+        "outcomes": {
+          "healthBoost": 10,
+          "happinessBoost": 5,
+          "wealthChange": -200
+        }
+      },
+      {
+        "text": "Go for a basic checkup",
+        "order": 2,
+        "outcomes": {
+          "healthBoost": 5,
+          "wealthChange": -100
+        }
+      },
+      {
+        "text": "Skip it this year",
+        "order": 3,
+        "outcomes": {
+          "healthPenalty": 5
+        }
+      }
+    ]
+  },
+  {
+    "title": "Start Fitness Journey",
+    "description": "You realize you need to get in shape. What's your approach?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "COMMON",
+    "minAge": 16,
+    "maxAge": 70,
+    "decisions": [
+      {
+        "text": "Join a gym and hire a trainer",
+        "order": 1,
+        "outcomes": {
+          "physicalBoost": 15,
+          "healthBoost": 10,
+          "happinessBoost": 8,
+          "wealthChange": -1500
+        }
+      },
+      {
+        "text": "Exercise at home regularly",
+        "order": 2,
+        "outcomes": {
+          "physicalBoost": 8,
+          "healthBoost": 5,
+          "happinessBoost": 5
+        }
+      },
+      {
+        "text": "Start slowly with walks",
+        "order": 3,
+        "outcomes": {
+          "physicalBoost": 3,
+          "healthBoost": 3
+        }
+      }
+    ]
+  },
+  {
+    "title": "Learning Opportunity",
+    "description": "You discover an opportunity to learn a new skill. Do you take it?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 65,
+    "decisions": [
+      {
+        "text": "Dedicate yourself fully to learning",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 12,
+          "creativityBoost": 8,
+          "wealthChange": -500
+        }
+      },
+      {
+        "text": "Learn in your spare time",
+        "order": 2,
+        "outcomes": {
+          "intelligenceBoost": 5,
+          "creativityBoost": 3
+        }
+      },
+      {
+        "text": "Pass for now",
+        "order": 3,
+        "outcomes": {}
+      }
+    ]
+  },
+  {
+    "title": "Financial Windfall",
+    "description": "You've received an unexpected sum of money. How do you spend it?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "RARE",
+    "minAge": 18,
+    "maxAge": 70,
+    "minStats": {
+      "wealth": 0
+    },
+    "decisions": [
+      {
+        "text": "Invest wisely for the future",
+        "order": 1,
+        "outcomes": {
+          "intelligenceBoost": 8,
+          "wealthChange": 5000
+        }
+      },
+      {
+        "text": "Treat yourself to something nice",
+        "order": 2,
+        "outcomes": {
+          "happinessBoost": 15,
+          "wealthChange": -2000
+        }
+      },
+      {
+        "text": "Save it for emergencies",
+        "order": 3,
+        "outcomes": {
+          "wealthChange": 2000
+        }
+      }
+    ]
+  },
+  {
+    "title": "Travel Adventure",
+    "description": "You have the opportunity to travel to an exciting destination. Do you go?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 18,
+    "maxAge": 65,
+    "decisions": [
+      {
+        "text": "Book the trip immediately",
+        "order": 1,
+        "outcomes": {
+          "happinessBoost": 20,
+          "charismaBoost": 5,
+          "intelligenceBoost": 3,
+          "wealthChange": -3000
+        }
+      },
+      {
+        "text": "Save up for a bigger trip later",
+        "order": 2,
+        "outcomes": {
+          "happinessBoost": 3,
+          "wealthChange": 1000
+        }
+      },
+      {
+        "text": "Stay home and save money",
+        "order": 3,
+        "outcomes": {
+          "happinessPenalty": 5,
+          "wealthChange": 500
+        }
+      }
+    ]
+  },
+  {
+    "title": "Health Scare",
+    "description": "You're not feeling well and need medical attention. What do you do?",
+    "eventType": "LIFE_EVENT",
+    "rarity": "UNCOMMON",
+    "minAge": 20,
+    "maxAge": 80,
+    "decisions": [
+      {
+        "text": "See a doctor immediately",
+        "order": 1,
+        "outcomes": {
+          "healthBoost": 8,
+          "happinessBoost": 3,
+          "wealthChange": -500
+        }
+      },
+      {
+        "text": "Rest and see if it improves",
+        "order": 2,
+        "outcomes": {
+          "healthPenalty": 5,
+          "happinessBoost": 2
+        }
+      },
+      {
+        "text": "Ignore it and push through",
+        "order": 3,
+        "outcomes": {
+          "healthPenalty": 15,
+          "happinessPenalty": 5
+        }
+      }
+    ]
+  }
+]
