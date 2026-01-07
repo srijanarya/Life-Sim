@@ -20,6 +20,9 @@ namespace LifeCraft.UI
         [Header("Game UI")]
         public StatsPanel StatsPanel;
         public TimelinePanel TimelinePanel;
+        public EventPopupPanel EventPopupPanel;
+
+        public GameObject CareerDashboard;
 
         [Header("Message Toast")]
         [SerializeField] private GameObject messageToastPrefab;
@@ -79,7 +82,7 @@ namespace LifeCraft.UI
 
         public void ShowEventPopup(PlayerEvent playerEvent, EventTemplate eventTemplate)
         {
-            Debug.Log($"Showing event: {eventTemplate.Title}");
+            EventPopupPanel?.ShowEvent(playerEvent, eventTemplate);
         }
         
         public void ShowMessage(string title, string message, float duration = 3f)
@@ -204,22 +207,4 @@ namespace LifeCraft.UI
         }
     }
 
-    [System.Serializable]
-    public class StatsPanel : MonoBehaviour
-    {
-        public void UpdateStats()
-        {
-            if (GameManager.Instance.PlayerProfile == null) return;
-
-        }
-    }
-
-    [System.Serializable]
-    public class TimelinePanel : MonoBehaviour
-    {
-        public void UpdateTimeline()
-        {
-            if (GameManager.Instance.CurrentGameState == null) return;
-        }
-    }
 }

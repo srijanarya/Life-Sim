@@ -62,6 +62,23 @@ namespace LifeCraft.Core
             }));
         }
 
+        public void MakeDecision(string eventId, string decisionId)
+        {
+            if (CurrentGameState == null)
+            {
+                Debug.LogError("No active game state");
+                return;
+            }
+
+            StartCoroutine(ApiClient.Instance.Post($"/api/game/{CurrentGameState.Id}/decisions", new {
+                eventId = eventId,
+                decisionId = decisionId
+            }, (response) =>
+            {
+                UIManager.Instance.RefreshUI();
+            }));
+        }
+
         [System.Serializable]
         private class AdvanceTimeResponse
         {
