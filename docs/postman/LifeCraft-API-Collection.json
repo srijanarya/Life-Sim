@@ -1,0 +1,911 @@
+{
+  "info": {
+    "name": "LifeCraft API",
+    "description": "Complete API collection for LifeCraft - Real Life Simulator",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0",
+    "_postman_id": "lifecraft-api-collection-v1"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "player_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "game_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "event_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "decision_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register Player",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"username\": \"testplayer\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Register a new player account"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response has player data\", function () {",
+                  "    pm.expect(jsonData).to.have.property('player');",
+                  "});",
+                  "pm.test(\"Player has id\", function () {",
+                  "    pm.expect(jsonData.player).to.have.property('id');",
+                  "});"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Pre-request script - set dynamic values if needed",
+                  "pm.request.body.raw = JSON.stringify({",
+                  "  email: 'player' + Date.now() + '@example.com',",
+                  "  username: 'player' + Date.now(),",
+                  "  password: 'password123'",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Login and get authentication token"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response has token\", function () {",
+                  "    pm.expect(jsonData).to.have.property('token');",
+                  "});",
+                  "pm.test(\"Response has player\", function () {",
+                  "    pm.expect(jsonData).to.have.property('player');",
+                  "});",
+                  "// Save token to environment variables for future requests",
+                  "if (jsonData.token) {",
+                  "    pm.collectionVariables.set('token', jsonData.token);",
+                  "    pm.collectionVariables.set('player_id', jsonData.player.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Player",
+      "item": [
+        {
+          "name": "Get Player Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/player/{{player_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "player", "{{player_id}}"]
+            },
+            "description": "Get player profile and stats"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Player Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"health\": 100,\n  \"happiness\": 100,\n  \"wealth\": 50000,\n  \"intelligence\": 75,\n  \"charisma\": 70,\n  \"physical\": 80,\n  \"creativity\": 65\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/player/{{player_id}}/profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "player", "{{player_id}}", "profile"]
+            },
+            "description": "Update player stats"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Game",
+      "item": [
+        {
+          "name": "Create New Game",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"playerId\": \"{{player_id}}\",\n  \"initialTraits\": {\n    \"startingAge\": 18\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/game",
+              "host": ["{{base_url}}"],
+              "path": ["api", "game"]
+            },
+            "description": "Create a new game session"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response has game id\", function () {",
+                  "    pm.expect(jsonData).to.have.property('game');",
+                  "});",
+                  "// Save game ID for future requests",
+                  "if (jsonData.game && jsonData.game.id) {",
+                  "    pm.collectionVariables.set('game_id', jsonData.game.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Game State",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/game/{{game_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "game", "{{game_id}}"]
+            },
+            "description": "Get current game state"
+          },
+          "response": []
+        },
+        {
+          "name": "Advance Time",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"months\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/game/{{game_id}}/advance",
+              "host": ["{{base_url}}"],
+              "path": ["api", "game", "{{game_id}}", "advance"]
+            },
+            "description": "Advance game time by specified months"
+          },
+          "response": []
+        },
+        {
+          "name": "Make Decision",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"{{event_id}}\",\n  \"decisionId\": \"{{decision_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/game/{{game_id}}/decisions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "game", "{{game_id}}", "decisions"]
+            },
+            "description": "Submit a decision for an event"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Get Random Event",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/events/random",
+              "host": ["{{base_url}}"],
+              "path": ["api", "events", "random"]
+            },
+            "description": "Get a random event based on player state",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "var jsonData = pm.response.json();",
+                    "pm.test(\"Status code is 200\", function () {",
+                    "    pm.response.to.have.status(200);",
+                    "});",
+                    "pm.test(\"Response has event\", function () {",
+                    "    pm.expect(jsonData).to.have.property('event');",
+                    "});",
+                    "// Save event ID for decision",
+                    "if (jsonData.event && jsonData.event.id) {",
+                    "    pm.collectionVariables.set('event_id', jsonData.event.id);",
+                    "}"
+                  ]
+                }
+              }
+            ]
+        },
+        {
+          "name": "Get Event Template",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/events/templates/{{event_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "events", "templates", "{{event_id}}"]
+            },
+            "description": "Get event template by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Event Decisions",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/events/templates/{{event_id}}/decisions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "events", "templates", "{{event_id}}", "decisions"]
+            },
+            "description": "Get available decisions for an event"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response has decisions array\", function () {",
+                  "    pm.expect(jsonData).to.have.property('decisions');",
+                  "    pm.expect(jsonData.decisions).to.be.an('array');",
+                  "});",
+                  "// Save first decision ID for testing",
+                  "if (jsonData.decisions && jsonData.decisions.length > 0) {",
+                  "    pm.collectionVariables.set('decision_id', jsonData.decisions[0].id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Economy",
+      "item": [
+        {
+          "name": "Get Player Balance",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/economy/{{player_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "economy", "{{player_id}}"]
+            },
+            "description": "Get player's currency balance"
+          },
+          "response": []
+        },
+        {
+          "name": "Record Transaction",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"IAP_PURCHASE\",\n  \"amount\": 1000,\n  \"currency\": \"premium\",\n  \"productId\": \"com.lifecraft.currency_1000\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/economy/transactions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "economy", "transactions"]
+            },
+            "description": "Record a transaction (IAP, VIP, etc.)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Leaderboard",
+      "item": [
+        {
+          "name": "Get Global Leaderboard",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/leaderboard/global?limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "leaderboard", "global"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get top 10 players globally"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Player Ranking",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/leaderboard/{{player_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "leaderboard", "{{player_id}}"]
+            },
+            "description": "Get player's current ranking"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Daily Challenges",
+      "item": [
+        {
+          "name": "Get Current Daily Challenge",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/daily-challenge/current",
+              "host": ["{{base_url}}"],
+              "path": ["api", "daily-challenge", "current"]
+            },
+            "description": "Get today's daily challenge"
+          },
+          "response": []
+        },
+        {
+          "name": "Complete Daily Challenge",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"playerId\": \"{{player_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/daily-challenge/{{player_id}}/complete",
+              "host": ["{{base_url}}"],
+              "path": ["api", "daily-challenge", "{{player_id}}", "complete"]
+            },
+            "description": "Complete today's daily challenge and claim rewards"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Milestones",
+      "item": [
+        {
+          "name": "Get Player Milestones",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/milestones/{{player_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "milestones", "{{player_id}}"]
+            },
+            "description": "Get player's milestone progress"
+          },
+          "response": []
+        },
+        {
+          "name": "Claim Milestone Reward",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/milestones/{{player_id}}/claim",
+              "host": ["{{base_url}}"],
+              "path": ["api", "milestones", "{{player_id}}", "claim"]
+            },
+            "description": "Claim milestone rewards"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "VIP",
+      "item": [
+        {
+          "name": "Get VIP Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/vip/status/{{player_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "vip", "status", "{{player_id}}"]
+            },
+            "description": "Get player's VIP subscription status"
+          },
+          "response": []
+        },
+        {
+          "name": "Subscribe to VIP",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tier\": \"VIP_MONTHLY\",\n  \"productId\": \"com.lifecraft.vip.monthly\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/vip/subscribe",
+              "host": ["{{base_url}}"],
+              "path": ["api", "vip", "subscribe"]
+            },
+            "description": "Subscribe to VIP tier"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Avatars",
+      "item": [
+        {
+          "name": "Get Player Avatars",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/avatars/{{player_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "avatars", "{{player_id}}"]
+            },
+            "description": "Get player's unlocked avatars"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Avatar Shop",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/avatars/shop",
+              "host": ["{{base_url}}"],
+              "path": ["api", "avatars", "shop"]
+            },
+            "description": "Get available avatars in shop"
+          },
+          "response": []
+        },
+        {
+          "name": "Equip Avatar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"avatarId\": \"avatar_001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/avatars/{{player_id}}/equip",
+              "host": ["{{base_url}}"],
+              "path": ["api", "avatars", "{{player_id}}", "equip"]
+            },
+            "description": "Equip a specific avatar"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

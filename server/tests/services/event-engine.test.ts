@@ -1,8 +1,8 @@
 import { eventEngine } from '../../src/events/event-engine.service';
 import { decisionSystem } from '../../src/events/decision-system.service';
 import { playerService } from '../../src/services/player.service';
-import { prisma } from '../../config/database';
-import { EventTemplate, GameState, PlayerProfile } from '@types/game';
+import { prisma } from '../../src/config/database';
+import { EventTemplate, GameState, PlayerProfile } from '../../src/types/game';
 
 describe('Event Engine', () => {
   let gameState: GameState;

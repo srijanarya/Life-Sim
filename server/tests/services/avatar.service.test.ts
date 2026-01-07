@@ -1,4 +1,4 @@
-import { AvatarService } from '../src/services/avatar.service';
+import { AvatarService } from '../../src/services/avatar.service';
 
 describe('AvatarService', () => {
   let service: AvatarService;

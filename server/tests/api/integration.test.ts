@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../src/index';
+import app from '../../src/index';
 
 const TEST_PLAYER = {
   id: 'test-player-id',

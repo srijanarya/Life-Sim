@@ -1,4 +1,4 @@
-import { VipService } from '../src/services/vip.service';
+import { VipService } from '../../src/services/vip.service';
 
 describe('VipService', () => {
   let service: VipService;

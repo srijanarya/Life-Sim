@@ -1,5 +1,5 @@
-import { RewardedAdsService } from '../src/services/rewarded-ads.service';
-import { avatarService } from '../src/services/avatar.service';
+import { RewardedAdsService } from '../../src/services/rewarded-ads.service';
+import { avatarService } from '../../src/services/avatar.service';
 
 describe('RewardedAdsService', () => {
   let service: RewardedAdsService;

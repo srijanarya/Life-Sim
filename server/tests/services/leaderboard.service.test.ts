@@ -1,4 +1,4 @@
-import { LeaderboardService } from '../src/services/leaderboard.service';
+import { LeaderboardService } from '../../src/services/leaderboard.service';
 
 describe('LeaderboardService', () => {
   let service: LeaderboardService;

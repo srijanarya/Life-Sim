@@ -1,4 +1,4 @@
-import { DailyChallengeService } from '../src/services/daily-challenge.service';
+import { DailyChallengeService } from '../../src/services/daily-challenge.service';
 
 describe('DailyChallengeService', () => {
   let service: DailyChallengeService;
