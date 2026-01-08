@@ -1,11 +1,48 @@
 # Quick Start Guide - Play LifeCraft Now
 
 **Goal**: Get the game playable in 10 minutes
-**Last Updated**: January 7, 2026
+**Last Updated**: January 8, 2026
 
 ---
 
-## Option A: Play via Postman (Fastest - 10 min)
+## Option A: Play via Web Browser (Easiest - 5 min)
+
+### Step 1: Start Backend
+
+```bash
+# Start database and Redis
+cd "LIFE SIMULATOR"
+docker-compose up -d
+
+# Setup and start backend
+cd server
+npm install          # First time only
+npm run dev
+```
+
+### Step 2: Open the Game
+
+Open this file in your browser:
+```
+client/web/index.html
+```
+
+Or with a local server:
+```bash
+cd client/web
+python3 -m http.server 8080
+# Then open http://localhost:8080
+```
+
+### Step 3: Play!
+
+1. Register a new account
+2. Create your character
+3. Make decisions and watch your life unfold!
+
+---
+
+## Option B: Play via Postman (API Testing - 10 min)
 
 ### Step 1: Start Backend (5 min)
 
@@ -86,40 +123,54 @@ Keep playing through events and advancing time!
 
 ---
 
-## Option B: Play via Unity Client (Full Game - 1-2 days)
+## Option C: Build iOS App via Unity (Full Game - 30 min)
 
 ### Prerequisites
-- Unity 2022.3 LTS+
-- Xcode 14+ (for iOS)
+
+- Unity 2022.3 LTS+ with iOS Build Support
+- Xcode 14+ (for iOS builds)
 - Mac computer
-- Backend running (see Option A, Step 1)
+- Backend running (see Option A)
 
-### Quick Setup
+### One-Click Setup
 
-1. **Create Unity Project** (5 min)
-   - Open Unity Hub
-   - New Project → 2D Core → "LifeCraft"
+1. **Install Unity** (if not installed)
+   - Download [Unity Hub](https://unity.com/download)
+   - Install Unity 2022.3 LTS
+   - Add iOS Build Support module
 
-2. **Import Scripts** (5 min)
-   ```bash
-   cp -r "LIFE SIMULATOR/client/Assets/Scripts" /path/to/LifeCraft/Assets/
-   ```
+2. **Open the Project**
+   - Unity Hub → Open → Select `LIFE SIMULATOR/client` folder
+   - Wait for Unity to import assets
 
-3. **Follow Unity Setup Guide** (1-2 hours)
-   - See `docs/UNITY_SETUP_GUIDE.md`
-   - Create scenes (MainMenu, CharacterCreation, Gameplay)
-   - Create UI prefabs
-   - Connect scripts
-   - Test in Editor
+3. **Run Automated Setup**
+   - In Unity, go to menu: **Tools → LifeCraft → Setup Game**
+   - Wait for setup to complete (~30 seconds)
+   - All scenes and prefabs are auto-generated!
 
-4. **Build and Test** (30 min)
-   - File → Build Settings → iOS
-   - Build → Open Xcode
-   - Run on device
+4. **Test in Editor**
+   - Open `Assets/Scenes/MainMenu`
+   - Press **Play** button
+   - Game should run!
+
+5. **Build for iOS**
+   - **Tools → LifeCraft → Build → Build iOS (Debug)**
+   - Choose output folder
+   - Open generated Xcode project
+   - Run on device or simulator
+
+### Available Unity Menu Commands
+
+| Menu Item | Description |
+|-----------|-------------|
+| Tools → LifeCraft → Setup Game | Full auto-setup (scenes + prefabs + iOS config) |
+| Tools → LifeCraft → Quick Setup | Scenes only |
+| Tools → LifeCraft → Configure iOS Build | iOS settings only |
+| Tools → LifeCraft → Build → Build iOS | Create iOS build |
 
 ---
 
-## Option C: Play via cURL (For Developers)
+## Option D: Play via cURL (For Developers)
 
 Use these commands directly in terminal:
 

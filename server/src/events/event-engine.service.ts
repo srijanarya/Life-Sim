@@ -87,7 +87,7 @@ export class EventEngine {
       eligibleEvents.push(event);
     }
 
-    return filteredEvents;
+    return eligibleEvents;
   }
 
   private selectWeightedEvent(
@@ -305,6 +305,33 @@ export class EventEngine {
       );
     } catch (error) {
       logger.error('Failed to set event cooldown:', error);
+    }
+  }
+
+  async queryEventTemplates(filters: {
+    type?: string;
+    rarity?: string;
+  }): Promise<EventTemplate[]> {
+    try {
+      const where: Record<string, unknown> = { isActive: true };
+
+      if (filters.type) {
+        where.eventType = filters.type;
+      }
+      if (filters.rarity) {
+        where.rarity = filters.rarity;
+      }
+
+      const templates = await prisma.eventTemplate.findMany({
+        where,
+        include: { decisions: true },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      return templates as unknown as EventTemplate[];
+    } catch (error) {
+      logger.error('Failed to query event templates:', error);
+      throw error;
     }
   }
 

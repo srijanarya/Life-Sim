@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeCraft - Life Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Auth Screen -->
+        <div id="auth-screen" class="screen active">
+            <div class="container">
+                <h1 class="game-title">LifeCraft</h1>
+                <p class="subtitle">Your Life, Your Choices</p>
+
+                <div id="login-form" class="form-container">
+                    <h2>Login</h2>
+                    <input type="email" id="login-email" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button onclick="login()" class="btn primary">Login</button>
+                    <p class="switch-text">Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+                </div>
+
+                <div id="register-form" class="form-container hidden">
+                    <h2>Register</h2>
+                    <input type="text" id="register-username" placeholder="Username" required>
+                    <input type="email" id="register-email" placeholder="Email" required>
+                    <input type="password" id="register-password" placeholder="Password" required>
+                    <button onclick="register()" class="btn primary">Create Account</button>
+                    <p class="switch-text">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Menu Screen -->
+        <div id="menu-screen" class="screen">
+            <div class="container">
+                <h1 class="game-title">LifeCraft</h1>
+                <p class="welcome-text">Welcome, <span id="player-name">Player</span>!</p>
+
+                <div class="menu-buttons">
+                    <button onclick="newGame()" class="btn primary large">New Life</button>
+                    <button onclick="continueGame()" class="btn secondary large" id="continue-btn" disabled>Continue</button>
+                    <button onclick="logout()" class="btn outline">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Character Creation Screen -->
+        <div id="creation-screen" class="screen">
+            <div class="container">
+                <h2>Create Your Character</h2>
+
+                <div class="creation-form">
+                    <div class="form-group">
+                        <label>Character Name</label>
+                        <input type="text" id="char-name" placeholder="Enter name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Starting Age</label>
+                        <input type="number" id="char-age" value="18" min="18" max="30">
+                    </div>
+
+                    <h3>Distribute Bonus Points: <span id="points-remaining">20</span></h3>
+
+                    <div class="stat-sliders">
+                        <div class="stat-row">
+                            <label>Health</label>
+                            <input type="range" id="stat-health" min="0" max="20" value="0" oninput="updatePoints()">
+                            <span class="stat-value">50</span>
+                        </div>
+                        <div class="stat-row">
+                            <label>Intelligence</label>
+                            <input type="range" id="stat-intelligence" min="0" max="20" value="0" oninput="updatePoints()">
+                            <span class="stat-value">50</span>
+                        </div>
+                        <div class="stat-row">
+                            <label>Charisma</label>
+                            <input type="range" id="stat-charisma" min="0" max="20" value="0" oninput="updatePoints()">
+                            <span class="stat-value">50</span>
+                        </div>
+                        <div class="stat-row">
+                            <label>Creativity</label>
+                            <input type="range" id="stat-creativity" min="0" max="20" value="0" oninput="updatePoints()">
+                            <span class="stat-value">50</span>
+                        </div>
+                        <div class="stat-row">
+                            <label>Happiness</label>
+                            <input type="range" id="stat-happiness" min="0" max="20" value="0" oninput="updatePoints()">
+                            <span class="stat-value">50</span>
+                        </div>
+                    </div>
+
+                    <div class="button-row">
+                        <button onclick="goToMenu()" class="btn outline">Back</button>
+                        <button onclick="startGame()" class="btn primary">Start Life</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-container">
+                <!-- Stats Bar -->
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span class="stat-icon">❤️</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill health" id="health-bar"></div>
+                        </div>
+                        <span class="stat-number" id="health-value">50</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">😊</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill happiness" id="happiness-bar"></div>
+                        </div>
+                        <span class="stat-number" id="happiness-value">50</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">💰</span>
+                        <span class="stat-number" id="wealth-value">$0</span>
+                    </div>
+                </div>
+
+                <!-- Character Info -->
+                <div class="character-info">
+                    <h2 id="game-char-name">Character</h2>
+                    <p>Age: <span id="game-age">18</span> | Year: <span id="game-year">1</span> | Month: <span id="game-month">1</span></p>
+                </div>
+
+                <!-- Event Display -->
+                <div class="event-container" id="event-container">
+                    <div class="event-card" id="event-card">
+                        <div class="event-header">
+                            <span class="event-type" id="event-type">Life Event</span>
+                            <span class="event-rarity" id="event-rarity">Common</span>
+                        </div>
+                        <h3 id="event-title">Welcome to your life!</h3>
+                        <p id="event-description">Your journey begins. Make choices that will shape your destiny.</p>
+
+                        <div class="decisions" id="decisions-container">
+                            <!-- Decisions will be added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Event State -->
+                <div class="no-event" id="no-event" style="display: none;">
+                    <p>Nothing eventful happening right now...</p>
+                    <button onclick="advanceTime()" class="btn primary">Advance Time</button>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="game-actions">
+                    <button onclick="advanceTime()" class="btn secondary" id="advance-btn">Next Month</button>
+                    <button onclick="viewStats()" class="btn outline">View Stats</button>
+                    <button onclick="quitGame()" class="btn outline danger">Quit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Modal -->
+        <div id="stats-modal" class="modal">
+            <div class="modal-content">
+                <h2>Your Stats</h2>
+                <div class="full-stats" id="full-stats">
+                    <!-- Stats will be populated here -->
+                </div>
+                <button onclick="closeStats()" class="btn primary">Close</button>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

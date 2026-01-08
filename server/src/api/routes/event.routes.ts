@@ -36,9 +36,10 @@ router.get('/templates', async (req: Request, res: Response) => {
   try {
     const { type, rarity } = req.query;
 
-    const events = await eventEngine.getEventTemplate(
-      Array.isArray(type) ? type[0] : (type as string)
-    );
+    const events = await eventEngine.queryEventTemplates({
+      type: typeof type === 'string' ? type : undefined,
+      rarity: typeof rarity === 'string' ? rarity : undefined,
+    });
 
     res.json(events);
   } catch (error) {

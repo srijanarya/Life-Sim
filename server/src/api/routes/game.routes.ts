@@ -77,9 +77,28 @@ router.post('/:id/advance', async (req: Request, res: Response) => {
       },
     });
 
+    const player = await prisma.player.findUnique({
+      where: { id: gameState.playerId },
+      include: { profile: true },
+    });
+
+    if (!player?.profile) {
+      return res.status(404).json({ error: 'Player profile not found' });
+    }
+
+    const previousEvents = await prisma.playerEvent.findMany({
+      where: { gameId: id },
+      select: { templateId: true },
+    });
+    const previousEventIds = previousEvents.map((e) => e.templateId);
+
     await eventEngine.setEventCooldown(id);
 
-    const eventTemplate = await eventEngine.generateEvent(updatedGame);
+    const eventTemplate = await eventEngine.generateEvent(
+      updatedGame,
+      player.profile,
+      previousEventIds
+    );
     if (eventTemplate) {
       const playerEvent = await eventEngine.recordEvent(
         id,
